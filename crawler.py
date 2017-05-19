@@ -114,7 +114,7 @@ def crawl_web(seed):
                 #print "tocrawl"
                 #print tocrawl
         return graph
-page="http://www.innovaccer.com/"
+page="http://www.admybrand.com/"
 content=get_page(page)
 soup=BeautifulSoup(content)
 graph=crawl_web(page)
