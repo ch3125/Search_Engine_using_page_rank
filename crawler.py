@@ -1,11 +1,14 @@
-import HTMLParser
-import cStringIO
+import html.parser
+try:
+    import cStringIO
+except ImportError:
+    import StringIO
 from bs4 import BeautifulSoup
-import urllib2
+import urllib.request
 
-class HTML2Text(HTMLParser.HTMLParser):
+class HTML2Text(html.parser.HTMLParser):
     def __init__(self):
-        HTMLParser.HTMLParser.__init__(self)
+        html.parser.HTMLParser.__init__(self)
         self.output = cStringIO.StringIO()
         self.var=0
     def get_text(self):
@@ -72,7 +75,7 @@ def print_all_links(page):
 
 def get_page(url):
         try:                                
-                return urllib2.urlopen(url).read()
+                return urllib.request.urlopen(url).read()
         except:
                 print( url)
                 print ("ERROR GETTING THE PAGE")
@@ -98,7 +101,7 @@ def crawl_web(seed):
         crawled=[]
         #index={}
         graph={}
-        while tocrawl: #and len(crawled)<12:
+        while tocrawl and len(crawled)<12:
             f_crawled=open("crawled.txt","a+")
             page=tocrawl[0]
             
